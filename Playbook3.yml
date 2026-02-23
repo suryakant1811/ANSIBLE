@@ -1,0 +1,16 @@
+- name: Playbook loop
+  hosts: all
+  become: true
+
+  tasks:      
+    - name: update ubuntu
+      apt:
+        update_cache: true
+
+    - name: Install multiple items at once
+      apt:
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - git
+        - tree
