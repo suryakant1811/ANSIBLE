@@ -1,0 +1,20 @@
+- name: Playbook 
+  hosts: all
+  become: true
+
+  tasks:      
+    - name: update ubuntu
+      apt:
+        update_cache: true
+
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: latest
+
+    - get_url:
+        url: https://www.w3schools.com/html/html_basic.asp
+        dest: /var/www/html/index1.html
+        owner: ubuntu
+        group: ubuntu
+        mode: '0777'
