@@ -1,0 +1,17 @@
+- name: Nginx playbook
+  hosts: all
+  become: true
+
+  vars:
+    - a: git
+    - b: latest
+
+  tasks:      
+    - name: update ubuntu
+      apt:
+        update_cache: true
+
+    - name: Install git using vars 
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
