@@ -1,0 +1,17 @@
+- name: Nginx playbook
+  hosts: all
+  become: true
+  vars:
+    - a: 5
+  tasks:      
+    - name: update ubuntu
+      apt:
+        update_cache: true
+    - name: removes multiple items at once
+      apt:
+        name: "{{item}}"
+        state: absent
+      when: a == 5
+      with_items:
+        - git
+        - tree
