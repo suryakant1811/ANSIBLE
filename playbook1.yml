@@ -1,0 +1,26 @@
+- name: Nginx playbook
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Remove  nginx
+      apt:
+        name: nginx
+        state: absent
+        
+    - name: update ubuntu
+      apt:
+        update_cache: true
+
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: latest
+
+    - copy: 
+        src: frontend/index.html
+        dest: /var/www/html/index.html
+        owner: ubuntu
+        group: ubuntu
+        mode: '0777'
+        backup: true
